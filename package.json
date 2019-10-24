@@ -1,0 +1,27 @@
+{
+  "name": "multblog",
+  "version": "1.0.0",
+  "description": "This blog is dedicated to all Soviet cortoons",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/picpoint/multblog.git"
+  },
+  "keywords": [
+    "mult",
+    "blog",
+    "posts"
+  ],
+  "author": "rmtar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
