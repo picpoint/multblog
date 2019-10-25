@@ -2,10 +2,14 @@ const express = require('express');
 const app = express();
 const port = process.env.port || 4000;
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const urlMongoDB = 'mongodb+srv://rmtar:rmtar@cluster0-nw44p.mongodb.net/multfilmdb?retryWrites=true&w=majority';
 let collection = null;
 
 app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 
 const multfilmSchema = mongoose.Schema({
@@ -24,48 +28,19 @@ const multfilmSchema = mongoose.Schema({
 const Multfilm = mongoose.model('Multfilm', multfilmSchema);
 
 
-let kolobok = new Multfilm({
-	_id: new mongoose.Types.ObjectId(),
-	title: 'Колобок',
-	yearsOfIssue: '1974',
-	duration: '35 мин'
-});
-
-kolobok.save((err) => {
-	if(err) {
-		throw new Error(`***ERR TO SAVE MULTFILM KOLOBOK***`);
-	} else {
-		console.log('KOLOBOK IS SAVE');
-	}
-});
-
-
-let zibilPes = new Multfilm({
-	_id: new mongoose.Types.ObjectId,
-	title: 'Жил был пёс',
-	yearsOfIssue: '1985',
-	duration: '22 мин'
-});
-
-zibilPes.save((err) => {
-	if(err) {
-		throw new Error(`***ERR TO SAVE MULTFILM ZILBILPES***`);
-	} else {
-		console.log('ZILBILPES IS SAVED');
-	}
-});
-
-
-
 
 
 mongoose.connect(urlMongoDB, {useNewUrlParser: true}, (err) => {
 	if(err) {
 		throw new Error('***ERR TO CONNECT DB***');
 	}	else {
-		console.log('connect successfully');
-		
+		console.log('connect successfully');		
 	}
+
+	app.listen(port, () => {
+		console.log(`---server start on port ${port}---`);
+	});
+
 });
 
 
@@ -78,7 +53,21 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/public/index.html');	
 });
 
+app.post('/', (req, res) => {	
+	const multobj = new Multfilm({
+		title: req.body.titlemultfilm,
+		yearsOfIssue: req.body.dateofissue,
+		duration: req.body.durations,
+		source: req.body.sourse
+	});
+	
+	multobj.save((err) => {
+		if(err) {
+			throw new Error('***ERR TO SAVE OBJ***');
+		} else {
+			console.log('OBJ SAVE IS SUCCESSFULLY');
+		}
+	});	
 
-app.listen(port, () => {
-	console.log(`---server start on port ${port}---`);
 });
+

@@ -7,13 +7,17 @@
 	<title>Home page</title>
 </head>
 <body>
-	<h2>Форма заполнения</h2>	
-	<input type="text" id="titlemultfilm" placeholder="Название мультфильма">	
-	<br>
-	<input type="date" id="dateofissue" placeholder="Дата выхода">
-	<br>
-	<input type="text" id="durations" placeholder="Продолжительность">
-	<br>
-	<input type="text" id="sourse" placeholder="Свылка на источник">
+	<form action="/index.html" method="POST">
+		<h2>Форма заполнения корень</h2>	
+		<input type="text" name="titlemultfilm" id="titlemultfilm" placeholder="Название мультфильма">	
+		<br>
+		<input type="date" name="dateofissue" id="dateofissue" placeholder="Дата выхода">
+		<br>
+		<input type="text" name="durations" id="durations" placeholder="Продолжительность">
+		<br>
+		<input type="text" name="sourse" id="sourse" placeholder="Свылка на источник">
+		<br>
+		<input type="submit" value="SEND">
+	</form>
 </body>
 </html>
