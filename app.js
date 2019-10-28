@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const jsonParser = express.json();
 const urlMongoDB = 'mongodb+srv://rmtar:rmtar@cluster0-nw44p.mongodb.net/multfilmdb?retryWrites=true&w=majority';
-let collection = null;
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
@@ -59,14 +58,14 @@ app.post('/', (req, res) => {
 		title: req.body.titlemultfilm,
 		yearsOfIssue: req.body.dateofissue,
 		duration: req.body.duration,
-		source: req.body.sourse
+		source: req.body.source
 	});
 
 	newmultobj.save((err) => {
 		if(err) {
 			throw new Error('***ERR TO SAVE OBJ***');
 		} else {
-			console.log('save successfully');
+			console.log(`save successfully`);
 		}
   });
   
